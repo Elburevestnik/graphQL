@@ -1,12 +1,14 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql').graphqlHTTP;
-const schema = require('../schema/schema');
+const schema = require('./schema/schema');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 mongoose.connect('mongodb+srv://Lisa:Lisa123456789@cluster0.mbhxr.mongodb.net/graphQlYoutubeLessons?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true});
 
 const app = express();
 const PORT = 3005;
+app.use(cors());
 app.use('/graphql', graphqlHTTP({schema, graphiql: true}));
 
 const dbConnection = mongoose.connection;
